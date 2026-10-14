@@ -213,15 +213,15 @@ void collision_detection_general_SDF_with_suction(const Body* contact_body, cons
     }
 
     // // AABB bounding box check
-    // if (dynamic_cast<BodySDFObj*>(const_cast<Body*>(contact_body)) != nullptr) {
-    //     BodySDFObj* contact_sdf_body_ = dynamic_cast<BodySDFObj*>(const_cast<Body*>(contact_body));
-    //     std::pair<Vector3, Vector3> aabb1 = contact_sdf_body_->get_AABB();
-    //     std::pair<Vector3, Vector3> aabb2 = SDF_body_->get_AABB();
-    //     for (int axis = 0; axis < 3;axis ++) {
-    //         if (aabb1.second[axis] < aabb2.first[axis] - 1e-6 || aabb2.second[axis] < aabb1.first[axis] - 1e-6)
-    //             return;
-    //     }
-    // }
+     if (dynamic_cast<BodySDFObj*>(const_cast<Body*>(contact_body)) != nullptr) {
+         BodySDFObj* contact_sdf_body_ = dynamic_cast<BodySDFObj*>(const_cast<Body*>(contact_body));
+         std::pair<Vector3, Vector3> aabb1 = contact_sdf_body_->get_AABB();
+         std::pair<Vector3, Vector3> aabb2 = SDF_body_->get_AABB();
+         for (int axis = 0; axis < 3;axis ++) {
+             if (aabb1.second[axis] < aabb2.first[axis] - 1e-6 || aabb2.second[axis] < aabb1.first[axis] - 1e-6)
+                 return;
+         }
+     }
 
     Matrix4 E_w1 = contact_body->_E_0i;
 
